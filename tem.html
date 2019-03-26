@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <input type="radio" id="convert-c" checked> 攝氏轉換為華氏<br>
+        <input type="radio" id="convert-f"> 華氏轉換為攝氏<br>
+
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="1">1</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="2">2</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="3">3</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="4">4</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="5">5</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="6">6</button>
+
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="7">7</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="8">8</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="9">9</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value="0">0</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-4 input-pad" value=".">.</button>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="input" class="form-control text-right" placeholder="0"
+                aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+            <div class="input-group-append" id="button-addon4">
+                <button class="btn btn-outline-secondary" type="button" onclick="doCal()">轉換</button>
+                <button class="btn btn-outline-secondary" id="clear" type="button" onclick="cleaR()">清除</button>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">結果</span>
+            </div>
+            <input type="text" id="result" class="form-control text-right" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" readonly>
+        </div>
+    </div>
+    <script>
+        function doCal() {
+            var input = document.getElementById("input");
+            var result = document.getElementById("result");
+
+            if(document.getElementById("convert-c").checked){
+                var r = (input.value * 1.8) + 32;
+                result.value = r;
+            }
+            if(document.getElementById("convert-f").checked){
+                var r = (input.value - 32) * 5 / 9;
+                result.value = r;
+            }
+        }
+
+        function cleaR(){
+            var input = document.getElementById("input");
+            var result = document.getElementById("result");
+            
+            input.value = "";
+            result.value= "";
+        }
+
+        function inputButton(){
+            var input = document.getElementById("input");
+            var text = this.value;       //innerHTML是抓區塊內的值
+            input.value += text;
+        }
+        var inputButtons = document.getElementsByClassName("input-pad");
+        for(var i = 0; i < inputButtons.length ; i++){
+            inputButtons[i].onclick = inputButton;
+        }
+    </script>
+</body>
+
+
+
+</html>
