@@ -76,15 +76,16 @@
             result.value= "";
         }
 
+        var inputButtons = document.getElementsByClassName("input-pad");
+        for(var i = 0; i < inputButtons.length ; i++){
+            inputButtons[i].onclick = inputButton;
+        }
         function inputButton(){
             var input = document.getElementById("input");
             var text = this.value;       //innerHTML是抓區塊內的值
             input.value += text;
         }
-        var inputButtons = document.getElementsByClassName("input-pad");
-        for(var i = 0; i < inputButtons.length ; i++){
-            inputButtons[i].onclick = inputButton;
-        }
+        
     </script>
 </body>
 
