@@ -130,7 +130,8 @@
                 </li>
               </ul>
 
-              <div id="show"></div>
+              <!-- <div id="show"></div>-->
+              <!--偷看答案-->
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon1">猜答案</span>
                 <input id="userGuess" type="text" name="" class="form-control" value="" required="required">
@@ -188,7 +189,7 @@
 
       var text = document.getElementById("show");   //自己方便看答案
       text.innerHTML = answer;
-      // alert("開始猜!");
+      alert("開始猜!");
     }
 
     function abortGame() {
@@ -247,7 +248,7 @@
       {
         newNode.innerHTML = "<span class='label label-success'>"+ctA+"A"+ctBA+"B"+"</span>"+thisRoundAnswer;
         alert("過關 ! 按下確定後並直接重新開始 !");
-        //startGame();
+        startGame();
         
       }
       else

@@ -88,9 +88,19 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
           <h2>生命靈數</h2>
-          <!-- put your screen layout here to provide user interface -->
-          <input id="birthdate" class="form-control"   type="date" name="birthdate" value="0">
-          <a id="search" type="button" class="btn btn-default">查詢</a>
+          <ul id="searchResults" class="list-group">
+            <li class="list-group-item">
+                <span class="label label-danger">2019-03-22</span>
+                牡羊座:你是個主觀很強的人，只想著自己想做的事。
+            </li>
+          </ul>
+          
+          <div class="input-group">            
+              <input id="birthdate" class="form-control"   type="date" name="birthdate" value="0">
+              <span class="input-group-btn">
+                  <a id="search" type="button" class="btn btn-default">查詢</a>
+              </span>
+            </div>
         </div>
       </div>
     </div>
@@ -108,9 +118,11 @@
     <script>
       var search = document.getElementById("search");
       search.onclick = SSearch;
-
+      
       function SSearch(){
+        document.getElementById("searchResults").innerHTML = "";
         var constellations = "";
+
         var birth = document.getElementById("birthdate").value;
         var newbirth= new Date(birth);
         var year = newbirth.getFullYear();
@@ -168,10 +180,17 @@
           if(result > 9){
             result = Number((result.toString())[0])+Number((result.toString())[1]);
           }  
-        }
-        var x = horoscopeData[constellations]["name"] +" : "+ horoscopeData[constellations]["lookup"][result];
+        }alert(result);
+        var x = horoscopeData[constellations]["name"] +" : "+ horoscopeData[constellations]["lookup"][result-1];
         alert(x);
+        var resultz = document.getElementById("searchResults");       //顯示使用者猜數字的戰況
+        var newNode = document.createElement("li");
+        newNode.classList.add("list-group-item");
+        newNode.innerHTML = "<span class='label label-success'>"+birth+"</span>"
+                              + horoscopeData[constellations]["name"] +" : "+ horoscopeData[constellations]["lookup"][result];
+        resultz.appendChild(newNode);
       }
+      
 
       var horoscopeData = {
         "aquarius": {
