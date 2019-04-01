@@ -92,7 +92,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="btn-group btn-group-justified">
-                <a id="start" type="button" class="btn btn-default">開始</a>
+                <a id="start" type="button" class="btn btn-default" >開始</a>
                 <a id="restart" type="button" class="btn btn-default">放棄重來</a>
                 <a id="cheat" type="button" class="btn btn-default">看答案</a>
               </div><br>
@@ -166,8 +166,8 @@
     var guess = document.getElementById("guess");
     guess.onclick = doGuess;
 
+    //document.getElementById("cheat").disabled = true;
     var answer = "";
-
 
     document.getElementById("userGuess").onkeyup = function (event){
       if(event.keyCode == 13){
@@ -176,6 +176,7 @@
     };
 
     function startGame() {
+      start.disabled = true;
       document.getElementById("guessResults").innerHTML = "";
       document.getElementById("userGuess").value = "";
       answer = "";
@@ -209,11 +210,13 @@
       
       if(thisRoundAnswer.length != 4){
         alert("輸入錯誤 ! ");
+        document.getElementById("userGuess").value = "";
         return;
       }
 
       if(isNaN(thisRoundAnswer)){
         alert("必須輸入數字");
+        document.getElementById("userGuess").value = "";
         return;
       }
 
@@ -226,6 +229,7 @@
         if(existed.indexOf(number) != -1)
         {
           alert("不能輸入重複的文字");
+          document.getElementById("userGuess").value = "";
           return;
         }
 

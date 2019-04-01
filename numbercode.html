@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <hr>
+        <h3 align="center">終極密碼</h3>
+
+
+        <!-- <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">結果</span>
+            </div>
+            <input type="text" id="result" class="form-control text-right" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default" readonly>
+        </div> -->
+
+        <h4 id="range" align="center"></h4>
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="1">1</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="2">2</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="3">3</button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="4">4</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="5">5</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="6">6</button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="7">7</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="8">8</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="9">9</button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-4">
+                <!-- <button type="button" class="btn btn-secondary btn-block border btn-lg" id="abandon">Give Up!</button> -->
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-light btn-block border btn-lg input-pad" value="0">0</button>
+            </div>
+            <div class="col-4">
+                <!-- <button type="button" class="btn btn-secondary btn-block border btn-lg" onclick="cleaR()">Clear</button> -->
+            </div>
+        </div>
+
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">輸入答案</span>
+            </div>
+            <input type="text" id="input" class="form-control text-center" placeholder="0"
+                aria-label="Recipient's username with two button addons" aria-describedby="button-addon4" />
+            <div class="input-group-append" id="button-addon4">
+                <button class="btn btn-outline-secondary" id="enter" type="button">Enter</button>
+                <button class="btn btn-outline-secondary" id="clear" type="button" onclick="cleaR()">Clear</button>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-block border btn-lg mt-3" id="start">Start</button>
+        <button type="button" class="btn btn-secondary btn-block border btn-lg col-2" id="abandon">Give Up!</button>
+
+        <!-- <div id="show"></div> -->
+    </div>
+
+
+    <script>
+        var start = document.getElementById("start");
+        start.onclick = startGame;
+        var abandon = document.getElementById("abandon");
+        abandon.onclick = abandonGame;
+        var enter = document.getElementById("enter");
+        enter.onclick = enterAnswer;
+        var clear = document.getElementById("clear");
+
+        var answer = "";
+        abandon.disabled = true;
+        enter.disabled = true;
+        clear.disabled = true;
+        var borderTop = 0;
+        var borderBottom = 10000;       
+
+        function startGame() {
+            borderTop = 0;
+            borderBottom = 10000;
+            document.getElementById("range").innerHTML = borderTop + "~" + borderBottom;
+            abandon.disabled = false;
+            start.disabled = true;
+            enter.disabled = false;
+            clear.disabled = false;
+            document.getElementById("input").value = "";
+            answer = "";
+            
+            while (answer.length < 4) {
+                var number = Math.floor(Math.random() * 10);
+                // if (answer.indexOf(number) == -1) {         //確認4個數字是否重複
+                    answer += number;
+                // }
+                
+            }
+            document.getElementById("show").innerHTML = answer;
+        }
+
+        function abandonGame() {
+            if (confirm("放棄 ? ")) {
+                abandon.disabled = true;
+                start.disabled = false;
+                enter.disabled = true;
+                clear.disabled = true;
+                //startGame();
+            }
+        }        
+ 
+        document.getElementById("range").innerHTML = borderTop + "~" + borderBottom;
+
+        function enterAnswer(){
+            var userGuess = document.getElementById("input").value;
+            alert(userGuess);
+            if(isNaN(userGuess)){
+                alert("必須輸入數字");
+                document.getElementById("input").value = "";
+                return;
+            }
+            
+            if(userGuess <= borderTop || userGuess >= borderBottom){
+                alert("必須輸入範圍之內");
+                document.getElementById("input").value = "";
+                return;
+            }
+            else if(userGuess == answer){
+                alert("Boom!");
+            }
+            else if(userGuess > answer){
+                borderBottom = userGuess;
+            }
+            else if(parseInt(userGuess) < parseInt(answer)){
+                borderTop = userGuess;
+            }
+
+            document.getElementById("range").innerHTML = borderTop + "~" + borderBottom;
+            document.getElementById("input").value = "";
+        }
+        document.getElementById("input").onkeyup = function (event){
+            if(event.keyCode == 13){
+            enterAnswer();
+            }
+        };        
+
+        function cleaR() {
+            var input = document.getElementById("input");
+            input.value = "";
+        }
+
+        var inputButtons = document.getElementsByClassName("input-pad");
+        for (var i = 0; i < inputButtons.length; i++) {
+            inputButtons[i].onclick = inputButton;
+        }
+        function inputButton() {
+            var input = document.getElementById("input");
+            var text = this.value;       //innerHTML是抓區塊內的值
+            input.value += text;
+        }        
+    </script>
+</body>
+
+
+
+</html>
