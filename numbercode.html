@@ -143,7 +143,7 @@
 
         function enterAnswer(){
             var userGuess = document.getElementById("input").value;
-            alert(userGuess);
+            //alert(userGuess);
             if(isNaN(userGuess)){
                 alert("必須輸入數字");
                 document.getElementById("input").value = "";
@@ -186,6 +186,7 @@
         function inputButton() {
             var input = document.getElementById("input");
             var text = this.value;       //innerHTML是抓區塊內的值
+            if(input.value.length < 4)
             input.value += text;
         }        
     </script>
