@@ -127,6 +127,7 @@
                 
             }
             //document.getElementById("show").innerHTML = answer;
+            console.log(answer);
         }
 
         function abandonGame() {
@@ -157,6 +158,10 @@
             }
             else if(userGuess == answer){
                 alert("Boom!");
+                start.disabled = false;
+                abandon.disabled = true;
+                enter.disabled = true;
+                clear.disabled = true;
             }
             else if(userGuess > answer){
                 borderBottom = userGuess;
